@@ -92,4 +92,9 @@ public class MainManager : MonoBehaviour {
     public void BackToMenu() {
         SceneManager.LoadScene(0);
     }
+    
+    public void ToHighScores() {
+        SceneManager.LoadScene(2);
+    }
+
 }
