@@ -22,5 +22,5 @@ public class HighScoreManager : MonoBehaviour
     public void ToGame() {
         SceneManager.LoadScene(1);
     }
-
+    
 }

@@ -87,6 +87,7 @@ public class MainManager : MonoBehaviour {
             SetBestScoreText(m_Playername, m_Points);
             SaveManager.SaveHighScore(m_Playername, m_Points);
         }
+        SaveManager.CheckHighScores(m_Playername, m_Points);        
     }
 
     public void BackToMenu() {
