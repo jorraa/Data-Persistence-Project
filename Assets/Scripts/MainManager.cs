@@ -1,11 +1,12 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
-public class MainManager : MonoBehaviour
-{
+public class MainManager : MonoBehaviour {
     public Brick BrickPrefab;
     public int LineCount = 6;
     public Rigidbody Ball;
@@ -17,11 +18,16 @@ public class MainManager : MonoBehaviour
     private int m_Points;
     
     private bool m_GameOver = false;
+    private string m_Playername;
+    private string m_saveFilename;
 
-    
-    // Start is called before the first frame update
-    void Start()
-    {
+
+    void Start() {
+        string highScorePlayerName = SaveManager.Instance.CurrentSaveData.highScorePlayer;
+        int highScore = SaveManager.Instance.CurrentSaveData.highScore;
+        m_Playername = SaveManager.Instance.CurrentPlayer;
+        SetBestScoreText(highScorePlayerName, highScore);
+        AddPoint(0); // to show Current Score
         const float step = 0.6f;
         int perLine = Mathf.FloorToInt(4.0f / step);
         
@@ -38,6 +44,11 @@ public class MainManager : MonoBehaviour
         }
     }
 
+    private void SetBestScoreText(string player, int highScore) {
+        GameObject bestScoreText =  GameObject.Find("BestScoreText");
+        bestScoreText.GetComponent<Text>().text = "Best Score: " + player + ": " + highScore;
+
+    }
     private void Update()
     {
         if (!m_Started)
@@ -65,12 +76,20 @@ public class MainManager : MonoBehaviour
     void AddPoint(int point)
     {
         m_Points += point;
-        ScoreText.text = $"Score : {m_Points}";
+        ScoreText.text = $"Score : {m_Playername}: {m_Points}";
     }
 
     public void GameOver()
     {
         m_GameOver = true;
         GameOverText.SetActive(true);
+        if (m_Points > SaveManager.Instance.CurrentSaveData.highScore) {
+            SetBestScoreText(m_Playername, m_Points);
+            SaveManager.SaveHighScore(m_Playername, m_Points);
+        }
+    }
+
+    public void BackToMenu() {
+        SceneManager.LoadScene(0);
     }
 }
