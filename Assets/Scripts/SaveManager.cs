@@ -20,7 +20,6 @@ public class SaveManager : MonoBehaviour {
 
         DontDestroyOnLoad(gameObject);
         LoadData();
-        
     }
     
     [System.Serializable]
@@ -41,7 +40,6 @@ public class SaveManager : MonoBehaviour {
     }
 
     public static void CheckHighScores(string playerName, int score) {
-        Debug.Log("Check: " + playerName + ": " + score);
         if (Instance.CurrentSaveData.highScores.Any(hScore => hScore.playerName == playerName)) {
             Instance.CurrentSaveData.highScores.ForEach(highScore => {
                 if (playerName == highScore.playerName && score > highScore.score) {
@@ -56,7 +54,6 @@ public class SaveManager : MonoBehaviour {
     }
 
     private static void saveCurrentData() {
-        
         Instance.CurrentSaveData.highScores.Sort((HighScore x, HighScore y) => 
             x.score < y.score ? 1 : x.score > y.score ? -1 : 0);
         string json = JsonUtility.ToJson(Instance.CurrentSaveData);

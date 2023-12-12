@@ -12,11 +12,6 @@ public class PopulateGrid : MonoBehaviour {
         Populate();
     }
 
-    void Update()
-    {
-        
-    }
-
     void Populate() {
         GameObject newObj;
         
@@ -25,12 +20,5 @@ public class PopulateGrid : MonoBehaviour {
             newObj.GetComponent<TextMeshProUGUI>().text = 
                 "  " + highScore.score + " - " + highScore.playerName;
         });
-        /*
-        for (int i = 0; i < 10; i++) {
-            newObj = (GameObject)Instantiate(prefab, transform);
-            newObj.GetComponent<TextMeshProUGUI>().text = "huhuu";
-            Debug.Log("text" + newObj.GetComponent<TextMeshProUGUI>().text);
-        }
-        */
     }
 }
