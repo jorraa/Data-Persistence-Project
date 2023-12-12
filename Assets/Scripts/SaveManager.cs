@@ -10,6 +10,7 @@ public class SaveManager : MonoBehaviour {
     public string CurrentPlayer;
     private static string m_saveFilename;
     public SaveData CurrentSaveData;
+    
     private void Awake() {
         m_saveFilename = Application.persistentDataPath + "/savefile.json";
         if (Instance != null) {
@@ -55,6 +56,9 @@ public class SaveManager : MonoBehaviour {
     }
 
     private static void saveCurrentData() {
+        
+        Instance.CurrentSaveData.highScores.Sort((HighScore x, HighScore y) => 
+            x.score < y.score ? 1 : x.score > y.score ? -1 : 0);
         string json = JsonUtility.ToJson(Instance.CurrentSaveData);
         File.WriteAllText(m_saveFilename, json);
     } 

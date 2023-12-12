@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class HighScoreManager : MonoBehaviour
 {
@@ -13,8 +14,19 @@ public class HighScoreManager : MonoBehaviour
         else {
             GameObject.Find("ToGameButton").SetActive(false);
         }
+        
     }
 
+    private void PopulateList() {
+        List<SaveManager.HighScore> highSCores = SaveManager.Instance.CurrentSaveData.highScores;
+        GameObject rowText = GameObject.Find("RowText");
+        
+        GameObject go1 = Instantiate(rowText);
+        Component textComponent = go1.GetComponent<Text>();
+        
+        
+
+    }
     public void ToMenu() {
         SceneManager.LoadScene(0);
     }

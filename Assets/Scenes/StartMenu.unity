@@ -693,6 +693,7 @@ MonoBehaviour:
   CurrentSaveData:
     highScorePlayer: 
     highScore: 0
+    highScores: []
 --- !u!1 &836092296
 GameObject:
   m_ObjectHideFlags: 0
